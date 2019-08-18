@@ -9,36 +9,57 @@
 
 
 // create the following classes Parking Lot, Vehicle
-
-class ParkingLot {
-    constructor(type,payment){
-        this.type = type;
-        this.spots = {'sm': 25, 'med':40, 'lg': 30, 'x-lg':5};
-        this.payment = payment;
-    }
-
-    // method to park the vehicle in the lot
-    parkVehicle(){
-
-    }
-}
-
 class Vehicle {
-    constructor(licensePlate, color, size ){
+    constructor(licensePlate, color, size) {
         this.licensePlate = licensePlate;
         this.color = color;
         this.size = size; // how can we equate spot types to size?
-    }    
+    }
 }
 
-let shoppingParking = new ParkingLot('shopping mall',100,true);
-console.log(shoppingParking);
+class ParkingLot {
+    constructor(type, payment) {
+        this.type = type;
+        this.spots = { 'sm': 25, 'med': 40, 'lg': 30, 'x-lg': 5 };
+        this.payment = payment;
+    }
+    
+    spotAvailability(){
+        console.log(this.spots)
+    }
+    // method to park the vehicle in the lot, modifies attribute of spots
+    parkedVehicle(vehicle) {
+        // depending on vehicle size, condition to decrement spots
+        if (vehicle.size == 'sm') {
+            this.spots['sm']--;
+        } else if (vehicle.size == 'med') {
+            this.spots['med']--;
+        } else if (vehicle.size == 'lg') {
+            this.spots['lg']--;
+        } else if (vehicle.size == 'x-lg') {
+            this.spots['x-lg']--;
+        }
+    }
+}
 
+
+
+let shoppingParking = new ParkingLot('shopping mall', true);
 let ferrari = new Vehicle('2fast2furious', 'red', 'med');
+let ferrari2 = new Vehicle('Fast1', 'yellow', 'med');
 let honda = new Vehicle('GroceryGetta', 'silver', 'med');
 let harley = new Vehicle('Vroom', 'black', 'sm');
 let schoolBus = new Vehicle('Schoolin', 'yellow', 'x-lg');
+let schoolBus2 = new Vehicle('Learning', 'yellow', 'x-lg');
 let ford = new Vehicle('Haulin', 'white', 'lg')
+
+shoppingParking.spotAvailability();
+shoppingParking.parkedVehicle(ferrari);
+shoppingParking.parkedVehicle(honda);
+shoppingParking.parkedVehicle(schoolBus);
+shoppingParking.parkedVehicle(schoolBus2);
+shoppingParking.parkedVehicle(ferrari2);
+shoppingParking.spotAvailability();
 
 
 
